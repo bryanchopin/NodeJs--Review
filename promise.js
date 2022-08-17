@@ -80,3 +80,52 @@ pizzaPromise
     .catch((messageFailed) => {
         console.log(messageFailed);
     });
+
+
+//chasing promise
+function orderPizza(flavorPizza){
+    return new Promise ((resolve, reject) => {
+        setTimeout(() => {
+            if(flavorPizza === 'peperoni'){
+                resolve(` preparing pizza ${flavorPizza}`);
+            }
+            else{
+                reject(`Pizza ${flavorPizza} is not ready`);
+            }
+        } , 2000);
+    });
+};
+
+
+function getPizza(data) {
+    return new Promise((resolve, reject) => {
+        console.log(data);
+        setTimeout(() => {
+            resolve('thanks it is ready');
+        } , 4000);
+    });
+}
+
+orderPizza('peperoni')
+    .then(res => {
+        return getPizza(res);
+    })
+    .then(res => {
+        console.log(res);
+    })
+    .catch(err => {
+        console.log(err);
+    });
+
+
+//adding async and await
+async function orderPizzaAsync(flavorPizza){
+    try{
+        const order = await orderPizza(flavorPizza);
+        const pizza = await getPizza(order);
+        console.log(pizza);
+    }
+    catch(err){
+        console.log(err);
+    }
+}
