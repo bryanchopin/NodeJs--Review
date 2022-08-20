@@ -129,3 +129,6 @@ async function orderPizzaAsync(flavorPizza){
         console.log(err);
     }
 }
+
+//call async function
+orderPizzaAsync('peperoni');
